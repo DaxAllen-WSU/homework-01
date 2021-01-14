@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <time.h>
 
 int
 main(int argc, char *argv[])
 {
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    printf("%d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
     printf("hello world (pid:%d)\n", (int) getpid());
     int rc = fork();
     if (rc < 0) {
